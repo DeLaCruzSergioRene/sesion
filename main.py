@@ -40,7 +40,7 @@ def main(page: ft.Page):
         page.update()
 
     boton_login = ft.ElevatedButton(
-        content=ft.Text("Iniciar Sesión"),
+        text="Iniciar Sesión", 
         on_click=iniciar_sesion,
         style=ft.ButtonStyle(
             bgcolor=ft.Colors.BLUE_200, 
