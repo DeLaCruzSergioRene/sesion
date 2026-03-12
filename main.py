@@ -2,7 +2,7 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "Bienvenido al inicio de sesión."
-    page.padding = 25
+    page.padding = 20
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER 
 
     titulo = ft.Text(
@@ -48,6 +48,11 @@ def main(page: ft.Page):
         )
     )
 
+    olvido_pass = ft.TextButton(
+        text="¿Olvidaste tu contraseña?",
+        on_click=lambda _: None 
+    )
+
     page.add(
         ft.Column(
             controls=[
@@ -55,6 +60,7 @@ def main(page: ft.Page):
                 nombre,
                 contrasena,
                 ft.Row([boton_login], alignment=ft.MainAxisAlignment.CENTER),
+                ft.Row([olvido_pass], alignment=ft.MainAxisAlignment.CENTER), 
                 ft.Divider(),
                 resumen
             ],
