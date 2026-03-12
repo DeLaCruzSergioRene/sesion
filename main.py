@@ -1,7 +1,7 @@
 import flet as ft
 
 def main(page: ft.Page):
-    page.title = "Bienvenido al incio de sesión."
+    page.title = "Bienvenido al inicio de sesión."
     page.padding = 25
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER 
 
@@ -14,26 +14,37 @@ def main(page: ft.Page):
     )
 
     nombre = ft.TextField(label="Nombre completo", hint_text="Ingrese el nombre completo")
-    correo = ft.TextField(label="Correo electrónico", hint_text="Ingrese su correo electrónico")
-    edad = ft.TextField(label="Edad del usuario", hint_text="Ingrese su edad")
-
+    contrasena = ft.TextField(label="Contraseña", password=True, can_reveal_password=True, hint_text="Ingrese su contraseña")
 
     resumen = ft.Text(value="", size=16, color=ft.Colors.BLUE_900)
 
-    def mostrar_resumen(e):
-        resumen.value = (
-            f"Nombre: {nombre.value}\n"
-            f"Correo: {correo.value}\n"
-            f"Edad: {edad.value}\n"
-        )
+    def iniciar_sesion(e):
+        nombre.error_text = None
+        contrasena.error_text = None
+        hay_error = False
+
+        if not nombre.value:
+            nombre.error_text = "Campo obligatorio"
+            hay_error = True
+        
+        if not contrasena.value:
+            contrasena.error_text = "Campo obligatorio"
+            hay_error = True
+
+        if not hay_error:
+            resumen.value = f"Bienvenido, {nombre.value}. Iniciando sesión..."
+            resumen.color = ft.Colors.BLUE_700
+        else:
+            resumen.value = ""
+            
         page.update()
 
-    boton_resumen = ft.ElevatedButton(
-        content=ft.Text("Mostrar resumen"),
-        on_click=mostrar_resumen,
+    boton_login = ft.ElevatedButton(
+        content=ft.Text("Iniciar Sesión"),
+        on_click=iniciar_sesion,
         style=ft.ButtonStyle(
-            bgcolor=ft.Colors.GREEN_400,
-            color=ft.Colors.WHITE
+            bgcolor=ft.Colors.BLUE_200, 
+            color=ft.Colors.BLUE_900    
         )
     )
 
@@ -42,9 +53,8 @@ def main(page: ft.Page):
             controls=[
                 ft.Row([titulo], alignment=ft.MainAxisAlignment.CENTER),
                 nombre,
-                correo,
-                edad,
-                ft.Row([boton_resumen], alignment=ft.MainAxisAlignment.CENTER),
+                contrasena,
+                ft.Row([boton_login], alignment=ft.MainAxisAlignment.CENTER),
                 ft.Divider(),
                 resumen
             ],
