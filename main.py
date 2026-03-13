@@ -65,7 +65,7 @@ def main(page: ft.Page):
             resumen
         ],
         width=400,
-        spacing=15
+        spacing=20
     )
 
     pantalla_inicio = ft.Column(
